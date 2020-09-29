@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+typeVendeur_admin, TypeVendeur admin access,model_type_vendeur,group_manager,1,1,1,1
+typeVendeur_user, TypeVendeur user access,model_type_vendeur,group_user,1,0,0,1
+
+typeFournisseur_admin, TypeFournisseur admin access,model_type_fournisseur,group_manager,1,1,1,1
+typeFournisseur_user, TypeFournisseur user access,model_type_fournisseur,group_user,1,0,0,1
+
+typeAcheteur_admin, TypeAcheteur admin access,model_type_acheteur,group_manager,1,1,1,1
+typeAcheteur_user, TypeAcheteur user access,model_type_acheteur,group_user,1,0,0,1
+
+typeBackOffice_admin, TypeBackOffice admin access,model_type_backoffice,group_manager,1,1,1,1
+typeBackOffice_user, TypeBackOffice user access,model_type_backoffice,group_user,1,0,0,1
+

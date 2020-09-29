@@ -1,0 +1,13 @@
+# ignore les fichiers de configuration de l'environnement de developpement personnel
+
+# IDE Eclipse
+**/.classpath
+**/.project
+**/.settings/
+**/.pydevproject
+
+# ignore les fichiers logs
+*.log
+
+# Mes fichiers locaux à ignorer
+

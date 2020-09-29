@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record model="ir.ui.view" id="odepo_contact_form_view">
+		<field name="name">res.partner.form.inherit</field>
+		<field name="model">res.partner</field>
+		<field name="inherit_id" ref="base.view_partner_form" />
+		<field name="arch" type="xml">
+			<field name="type" position="before">
+				<group>
+					<field name="acheteur" />
+					<field name="vendeur" />
+					<field name="fournisseur" />
+					<field name="backOffice" />
+				</group>
+			</field>
+			<field name="phone" position="after">
+				<label for="tel2" string="Telephone 2" />
+				<field name="phone2" widget="phone" />
+			</field>
+			<field name="user_ids" position="before">
+				<field name="mobile2" />
+			</field>
+			<field name="website" position="before">
+				<field name="skype" />
+			</field>
+			<field name="skype" position="before">
+				<field name="email2" />
+			</field>
+			<field name="title" position="after">
+				<field name="rencontre_lors" />
+			</field>
+			<field name="rencontre_lors" position="after">
+				<field name="don" />
+			</field>
+			<page name="internal_notes" position="before">
+				<page string="Acheteur"
+					attrs="{'invisible': [('acheteur','=',False)]}"
+					autofocus="autofocus">
+					<group>
+						<field name="type_acheteur" widget="many2many_tags"
+							options="{'no_create': True, 'no_create_edit':True}" />
+						<field name="commercial_attache"
+							options="{'no_create': True, 'no_create_edit':True}" />
+						<field name="export" />
+						<field name="nbre_magasin" />
+						<field name="societe_transport"
+							domain="[('is_company', '=', True)]"
+							options="{'no_create': True, 'no_create_edit':True}" />
+						<field name="contact_transport"
+							domain="[('is_company', '=', False)]"
+							options="{'no_create': True, 'no_create_edit':True}" />
+						<field name="pays_vente"
+							options="{'no_create': True, 'no_create_edit':True}" />
+						<field name="zone_vente"
+							options="{'no_create': True, 'no_create_edit':True}" />
+					</group>
+				</page>
+			</page>
+			<page name="internal_notes" position="after">
+				<page name="vendeur" string="Vendeur"
+					attrs="{'invisible': [('vendeur','=',False)]}"
+					autofocus="autofocus">
+					<group>
+						<field name="type_vendeur" widget="many2many_tags"
+							options="{'no_create': True, 'no_create_edit':True}" />
+						<field name="acheteur_attache"
+							options="{'no_quick_create': True, 'no_create_edit' : True}" />
+					</group>
+				</page>
+			</page>
+			<page name="internal_notes" position="after">
+				<page string="Fournisseur"
+					attrs="{'invisible': [('fournisseur','=',False)]}"
+					autofocus="autofocus">
+					<group>
+						<field name="type_fournisseur" widget="many2many_tags"
+							options="{'no_create': True, 'no_create_edit':True}" />
+					</group>
+				</page>
+			</page>
+		</field>
+	</record>
+	<record id="type_vendeur_form_view" model="ir.ui.view">
+		<field name="name">type.vendeur.form.view</field>
+		<field name="model">type.vendeur</field>
+		<field name="arch" type="xml">
+			<form>
+				<group>
+					<field name="name" />
+				</group>
+			</form>
+		</field>
+	</record>
+	<record id="type_acheteur_form_view" model="ir.ui.view">
+		<field name="name">type.acheteur.form.view</field>
+		<field name="model">type.acheteur</field>
+		<field name="arch" type="xml">
+			<form>
+				<group>
+					<field name="name" />
+				</group>
+			</form>
+		</field>
+	</record>
+
+	<record id="type_acheteur_tree_view" model="ir.ui.view">
+		<field name="name">type.acheteur.tree.view</field>
+		<field name="model">type.acheteur</field>
+		<field name="arch" type="xml">
+			<tree string="Acheteurs">
+
+				<field name="name" />
+
+			</tree>
+		</field>
+	</record>
+	<record id="type_fournisseur_form_view" model="ir.ui.view">
+		<field name="name">type.fournisseur.form.view</field>
+		<field name="model">type.fournisseur</field>
+		<field name="arch" type="xml">
+			<form>
+				<group>
+					<field name="name" />
+				</group>
+			</form>
+		</field>
+	</record>
+
+	<record id="type_backoffice_form_view" model="ir.ui.view">
+		<field name="name">type.backoffice.form.view</field>
+		<field name="model">type.backoffice</field>
+		<field name="arch" type="xml">
+			<form>
+				<group>
+					<field name="type_backoffice" />
+				</group>
+			</form>
+		</field>
+	</record>
+	<record id="type_backoffice_tree_view" model="ir.ui.view">
+		<field name="name">type.backoffice.tree.view</field>
+		<field name="model">type.backoffice</field>
+		<field name="arch" type="xml">
+			<tree string="backoffice">
+
+				<field name="type_backoffice" />
+
+			</tree>
+		</field>
+	</record>
+	<record id="view_odepo_filter" model="ir.ui.view">
+		<field name="name">res.partner.select.inherit</field>
+		<field name="model">res.partner</field>
+		<field name="inherit_id" ref="base.view_res_partner_filter" />
+		<field name="arch" type="xml">
+			<filter name="salesperson" position="before">
+				<filter string="Vendeurs" name="seller"
+					domain="[('vendeur','=',1)]" help="Liste Vendeurs" />
+				<filter string="Acheteurs" name="buyer"
+					domain="[('acheteur','=',1)]" help="Liste Acheteurs" />
+				<filter string="Fournisseurs" name="supplier"
+					domain="[('fournisseur','=',1)]" help="Liste Fournisseurs" />
+				<filter string="Backoffices" name="back"
+					domain="[('backOffice','=',1)]" help="Liste BackOffice" />
+			</filter>
+		</field>
+	</record>
+
+	<act_window id="action_view_vendeur" name="Type Vendeur"
+		res_model="type.vendeur" view_mode="tree,form" />
+	<act_window id="action_view_fournisseur"
+		name="Type Fournisseur" res_model="type.fournisseur"
+		view_mode="tree,form" />
+	<act_window id="action_view_acheteur" name="Type Acheteur"
+		res_model="type.acheteur" view_mode="tree,form" />
+	<act_window id="action_view_backoffice"
+		name="Type Backoffice" res_model="type.backoffice"
+		view_mode="tree,form" />
+
+
+	<menuitem id="odepo_contact_type_client" name="Type Client"
+		parent="crm.crm_menu_sales" sequence="6" />
+	<menuitem name="Type Vendeur" id="sub_vendeur_id"
+		parent="odepo_contact_type_client" sequence="15"
+		action="action_view_vendeur" />
+	<menuitem name="Type Fournisseur" id="sub_fournisseur_id"
+		parent="odepo_contact_type_client" sequence="16"
+		action="action_view_fournisseur" />
+	<menuitem name="Type Acheteur" id="sub_acheteur_id"
+		parent="odepo_contact_type_client" sequence="17"
+		action="action_view_acheteur" />
+	<menuitem name="Type Backoffice" id="sub_backoffice_id"
+		parent="odepo_contact_type_client" sequence="18"
+		action="action_view_backoffice" />
+
+</odoo>
